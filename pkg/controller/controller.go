@@ -218,7 +218,7 @@ func (c *controller) checkNamespace(ns *v1.Namespace) error {
 // target sleep-after rules
 func (c *controller) syncSleepAfterRules(namespace *v1.Namespace, lastActivity activity) error {
 	v, ok := namespace.Labels[c.SleepAfterSelector]
-	if !ok || v == "" {
+	if !ok || v == "" || v == "null" {
 		// namespace doesn't have sleep-after label, do nothing
 		return nil
 	}
@@ -301,7 +301,7 @@ func (c *controller) syncSleepAfterRules(namespace *v1.Namespace, lastActivity a
 // target delete-after rules
 func (c *controller) syncDeleteAfterRules(namespace *v1.Namespace, lastActivity activity) error {
 	v, ok := namespace.Labels[c.DeleteAfterSelector]
-	if !ok || v == "" {
+	if !ok || v == "" || v == "null" {
 		// namespace doesn't have delete-after label, do nothing
 		return nil
 	}
